@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"infinite health"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Zelda Twilight Princess
+  Version: 1
+  Date   : 2021-09-14
+  Author : Paradox
+
+  This script nops the instruction that changes player health.
+}
+
+[ENABLE]
+
+aobscan(infHealth,C6 25 FF 00 00 00 49 89 C6 66 41 C1 C6 08 66 45 89 74 3D 04) // should be unique
+alloc(newmem,$1000,infHealth)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  jmp return
+
+infHealth+0E:
+  jmp newmem
+  nop
+return:
+registersymbol(infHealth)
+
+[DISABLE]
+
+infHealth+0E:
+  db 66 45 89 74 3D 04
+
+unregistersymbol(infHealth)
+dealloc(newmem)
+
+//Initial Release
+{
+// ORIGINAL CODE - INJECTION POINT: 14F2663F2BA
+
+14F2663F283: E9 D0 00 00 00                    - jmp 14F2663F358
+14F2663F288: 83 AC 24 B0 02 00 00 09           - sub dword ptr [rsp+000002B0],09
+14F2663F290: 83 F8 00                          - cmp eax,00
+14F2663F293: 0F 9C 84 24 8C 02 00 00           - setl byte ptr [rsp+0000028C]
+14F2663F29B: 0F 94 84 24 8E 02 00 00           - sete byte ptr [rsp+0000028E]
+14F2663F2A3: 41 BE 00 00 00 00                 - mov r14d,00000000
+14F2663F2A9: 41 0F 4C C6                       - cmovl eax,r14d
+14F2663F2AD: 25 FF 00 00 00                    - and eax,000000FF
+14F2663F2B2: 49 89 C6                          - mov r14,rax
+14F2663F2B5: 66 41 C1 C6 08                    - rol r14w,08
+// ---------- INJECTING HERE ----------
+14F2663F2BA: 66 45 89 74 3D 04                 - mov [r13+rdi+04],r14w
+// ---------- DONE INJECTING  ----------
+14F2663F2C0: 66 45 0F 38 F0 A4 35 9A 01 00 00  - movbe r12w,[r13+rsi+0000019A]
+14F2663F2CB: 4D 0F BF E4                       - movsx r12,r12w
+14F2663F2CF: 66 0F 10 84 E4 58 01 00 00        - movupd xmm0,[rsp+00000158]
+14F2663F2D8: F2 44 0F 5A F8                    - cvtsd2ss xmm15,xmm0
+14F2663F2DD: 66 45 0F 7E FE                    - movd r14d,xmm15
+14F2663F2E2: 45 0F 38 F1 B4 3D 7C 62 00 00     - movbe [r13+rdi+0000627C],r14d
+14F2663F2EC: 8B 6C 24 78                       - mov ebp,[rsp+78]
+14F2663F2F0: 41 88 AC 3D 7F 63 00 00           - mov [r13+rdi+0000637F],bpl
+14F2663F2F8: 41 39 C4                          - cmp r12d,eax
+14F2663F2FB: 0F 92 84 24 8C 02 00 00           - setb byte ptr [rsp+0000028C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"health"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>2977B20534C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"No description"</Description>
+      <LastState Value="2953071616" RealAddress="21F5934534C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>21F5934534C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"awesome shit"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Cemu.exe
+  Version: 
+  Date   : 2021-09-14
+  Author : john
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(infHealth,C6 25 FF 00 00 00 49 89 C6 66 41 C1 C6 08 66 45 89 74 3D 04) // should be unique
+alloc(newmem,$1000,infHealth)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  jmp return
+
+infHealth+0E:
+  jmp newmem
+  nop
+return:
+registersymbol(infHealth)
+
+[DISABLE]
+
+infHealth+0E:
+  db 66 45 89 74 3D 04
+
+unregistersymbol(infHealth)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 22090B73CB6
+
+22090B73C7F: E9 D0 00 00 00                    - jmp 22090B73D54
+22090B73C84: 83 AC 24 B0 02 00 00 09           - sub dword ptr [rsp+000002B0],09
+22090B73C8C: 83 F8 00                          - cmp eax,00
+22090B73C8F: 0F 9C 84 24 8C 02 00 00           - setl byte ptr [rsp+0000028C]
+22090B73C97: 0F 94 84 24 8E 02 00 00           - sete byte ptr [rsp+0000028E]
+22090B73C9F: 41 BE 00 00 00 00                 - mov r14d,00000000
+22090B73CA5: 41 0F 4C C6                       - cmovl eax,r14d
+22090B73CA9: 25 FF 00 00 00                    - and eax,000000FF
+22090B73CAE: 49 89 C6                          - mov r14,rax
+22090B73CB1: 66 41 C1 C6 08                    - rol r14w,08
+// ---------- INJECTING HERE ----------
+22090B73CB6: 66 45 89 74 3D 04                 - mov [r13+rdi+04],r14w
+// ---------- DONE INJECTING  ----------
+22090B73CBC: 66 45 0F 38 F0 A4 35 9A 01 00 00  - movbe r12w,[r13+rsi+0000019A]
+22090B73CC7: 4D 0F BF E4                       - movsx r12,r12w
+22090B73CCB: 66 0F 10 84 E4 58 01 00 00        - movupd xmm0,[rsp+00000158]
+22090B73CD4: F2 44 0F 5A F8                    - cvtsd2ss xmm15,xmm0
+22090B73CD9: 66 45 0F 7E FE                    - movd r14d,xmm15
+22090B73CDE: 45 0F 38 F1 B4 3D 7C 62 00 00     - movbe [r13+rdi+0000627C],r14d
+22090B73CE8: 8B 6C 24 78                       - mov ebp,[rsp+78]
+22090B73CEC: 41 88 AC 3D 7F 63 00 00           - mov [r13+rdi+0000637F],bpl
+22090B73CF4: 41 39 C4                          - cmp r12d,eax
+22090B73CF7: 0F 92 84 24 8C 02 00 00           - setb byte ptr [rsp+0000028C]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [r13+rbx+000062D6],r14w</Description>
+      <AddressString>14F26640114</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>41</Byte>
+        <Byte>C1</Byte>
+        <Byte>C6</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>45</Byte>
+        <Byte>89</Byte>
+        <Byte>B4</Byte>
+        <Byte>1D</Byte>
+        <Byte>D6</Byte>
+        <Byte>62</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>24</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [r13+rdi+04],r14w</Description>
+      <AddressString>14F2663F2BA</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>41</Byte>
+        <Byte>C1</Byte>
+        <Byte>C6</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>45</Byte>
+        <Byte>89</Byte>
+        <Byte>74</Byte>
+        <Byte>3D</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>38</Byte>
+        <Byte>F0</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
