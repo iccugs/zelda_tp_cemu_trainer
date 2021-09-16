@@ -4,9 +4,9 @@
     <CheatEntry>
       <ID>48</ID>
       <Description>"Infinite Health"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : Cemu.exe
+      <AssemblerScript>{ Game   : The Legend of Zelda: Twilight Princess HD (for Cemu emulator)
   Version: 
   Date   : 2021-09-16
   Author : Paradox
@@ -78,6 +78,85 @@ dealloc(newmem)
 1A77E10E298: 41 88 AC 3D 7F 63 00 00           - mov [r13+rdi+0000637F],bpl
 1A77E10E2A0: 41 39 C4                          - cmp r12d,eax
 1A77E10E2A3: 0F 92 84 24 8C 02 00 00           - setb byte ptr [rsp+0000028C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>49</ID>
+      <Description>"Infinite Pellets"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : The Legend of Zelda: Twilight Princess HD (for Cemu emulator)
+  Version:
+  Date   : 2021-09-16
+  Author : Paradox
+
+  Infinite Pellets script made by replacing the opcode that decreases pellet count
+  with NOP array
+}
+
+[ENABLE]
+
+aobscan(infPellets,FF 00 00 00 BA 32 00 00 00 43 88 9C 1D F4 00 00 00) // should be unique
+alloc(newmem,$1000,infPellets)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  jmp return
+
+infPellets+09:
+  jmp newmem
+  nop 3
+return:
+registersymbol(infPellets)
+
+[DISABLE]
+
+infPellets+09:
+  db 43 88 9C 1D F4 00 00 00
+
+unregistersymbol(infPellets)
+dealloc(newmem)
+
+//Initial Release: 2021-09-16
+{
+// ORIGINAL CODE - INJECTION POINT: 2317361DC62
+
+2317361DC26: 83 AC 24 B0 02 00 00 08  - sub dword ptr [rsp+000002B0],08
+2317361DC2E: 41 83 FC 32              - cmp r12d,32
+2317361DC32: 0F 9C 84 24 8C 02 00 00  - setl byte ptr [rsp+0000028C]
+2317361DC3A: 0F 9F 84 24 8D 02 00 00  - setg byte ptr [rsp+0000028D]
+2317361DC42: 0F 94 84 24 8E 02 00 00  - sete byte ptr [rsp+0000028E]
+2317361DC4A: 41 BE 32 00 00 00        - mov r14d,00000032
+2317361DC50: 45 0F 4F E6              - cmovg r12d,r14d
+2317361DC54: 44 89 E3                 - mov ebx,r12d
+2317361DC57: 81 E3 FF 00 00 00        - and ebx,000000FF
+2317361DC5D: BA 32 00 00 00           - mov edx,00000032
+// ---------- INJECTING HERE ----------
+2317361DC62: 43 88 9C 1D F4 00 00 00  - mov [r13+r11+000000F4],bl
+// ---------- DONE INJECTING  ----------
+2317361DC6A: 43 88 94 05 12 02 00 00  - mov [r13+r8+00000212],dl
+2317361DC72: 39 C3                    - cmp ebx,eax
+2317361DC74: 0F 92 84 24 8C 02 00 00  - setb byte ptr [rsp+0000028C]
+2317361DC7C: 0F 97 84 24 8D 02 00 00  - seta byte ptr [rsp+0000028D]
+2317361DC84: 0F 94 84 24 8E 02 00 00  - sete byte ptr [rsp+0000028E]
+2317361DC8C: 89 5C 24 18              - mov [rsp+18],ebx
+2317361DC90: 89 54 24 1C              - mov [rsp+1C],edx
+2317361DC94: 44 89 64 24 2C           - mov [rsp+2C],r12d
+2317361DC99: 0F 82 13 06 00 00        - jb 2317361E2B2
+2317361DC9F: 83 AC 24 B0 02 00 00 01  - sub dword ptr [rsp+000002B0],01
 }
 </AssemblerScript>
     </CheatEntry>
@@ -188,6 +267,34 @@ dealloc(newmem)
         <Byte>0F</Byte>
         <Byte>38</Byte>
         <Byte>F0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of mov [r13+r11+000000F4],bl</Description>
+      <AddressString>2317361DC62</AddressString>
+      <Before>
+        <Byte>BA</Byte>
+        <Byte>32</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>43</Byte>
+        <Byte>88</Byte>
+        <Byte>9C</Byte>
+        <Byte>1D</Byte>
+        <Byte>F4</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>43</Byte>
+        <Byte>88</Byte>
+        <Byte>94</Byte>
+        <Byte>05</Byte>
+        <Byte>12</Byte>
       </After>
     </CodeEntry>
   </CheatCodes>
