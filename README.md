@@ -12,7 +12,7 @@ A game trainer for The Legend of Zelda: Twilight Princess HD that works with the
 
 ## Credits
 
-This project was built using tutorials and code examples from [GuidedHacking.com](https://guidedhacking.com). All credit for the original memory manipulation, process injection, and core trainer functionality goes to the [GuidedHacking](https://guidedhacking.com) community and their educational resources. This project simply builds upon their foundational work and adapts it for the Castlevania Dominus Collection.
+This project was built using tutorials and code examples from [GuidedHacking.com](https://guidedhacking.com). All credit for the original memory manipulation, process injection, and core trainer functionality goes to the [GuidedHacking](https://guidedhacking.com) community and their educational resources. This project simply builds upon their foundational work and adapts it for The Legend of Zelda: Twilight Princess HD.
 
 Special thanks to [GuidedHacking.com](https://guidedhacking.com) for their comprehensive game hacking tutorials and code examples.
 
